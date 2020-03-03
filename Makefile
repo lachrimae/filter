@@ -5,7 +5,7 @@ CPPFLAGS=-g# $(shell root-config --cflags)
 LDFLAGS=-g# $(shell root-config --ldflags)
 LDLIBS=#$(shell root-config --libs)
 
-SRCS=main.cpp filter.cpp
+SRCS=main.cpp libs/AudioFile.h src/filter.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 
 all: filter
