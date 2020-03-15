@@ -13,11 +13,19 @@ void copyFromFile(AudioFile<double>& fileObj, string fileLoc, AudioFile<double>:
 
 int main(int argc, char** argv)
 {
-    cout << "I am the simplest filter!" << endl;
-    if (argc != 2)
+    if (argc != 3)
         return errorMsg();
 
-    string inputName = argv[1];
+    bool doSimple = false;
+    string filterType = argv[1];
+    if (filterType == "simple")
+        doSimple = true;
+    else if (filterType == "butter")
+        doSimple = false;
+    else
+        return errorMsg();
+
+    string inputName = argv[2];
     if (inputName.length() < 4)
         return errorMsg();
     if (suffix(inputName) != ".wav")
@@ -31,8 +39,11 @@ int main(int argc, char** argv)
     AudioFile<double>::AudioBuffer buffer;
     copyFromFile(fileInterface, inputName, buffer);
 
-    // Run each channel through a Butterworth filter
-    butterworth(buffer);
+    // Run each channel through simple filter
+    if (doSimple)
+        simplest(buffer);
+    else
+        butterworth(buffer);
 
     // Finish our work with the buffer
     bool ok = fileInterface.setAudioBuffer(buffer);
@@ -49,7 +60,9 @@ int main(int argc, char** argv)
 }
 
 int errorMsg() {
-    cerr << "Usage: specify a .wav file and I will filter it, outputting .new.wav" << endl;
+    cerr << "Usage: filter [simple|butter] [file]\n"
+         << "Specify a .wav file and I will filter it, outputting .new.wav"
+         << endl;
     return 1;
 }
 

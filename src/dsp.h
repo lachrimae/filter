@@ -3,4 +3,5 @@
 #include <vector>
 #include "AudioFile.h"
 void butterworth (AudioFile<double>::AudioBuffer& buffer);
+void simplest (AudioFile<double>::AudioBuffer& buffer);
 #endif
