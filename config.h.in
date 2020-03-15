@@ -1,0 +1,2 @@
+#define filter_VERSION_MAJOR @filter_VERSION_MAJOR@
+#define filter_VERSION_MINOR @filter_VERSION_MINOR@
