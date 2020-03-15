@@ -13,7 +13,7 @@ void butterworth(AudioFile<double>::AudioBuffer& buffer) {
     if (nChannels > 0)
         nSamples = buffer[0].size();
 
-    // The coefficients for the following loop were calculated using Dr A.J. Fisher's mkfilter package,
+    // The following loop was calibrated using Dr A.J. Fisher's mkfilter package,
     // which you can access at https://www-users.cs.york.ac.uk/~fisher/mkfilter/. 
     static double xv[NZEROS+1], yv[NPOLES+1];
     for (int channel = 0; channel < nChannels; ++channel) {
@@ -30,7 +30,7 @@ void butterworth(AudioFile<double>::AudioBuffer& buffer) {
     return;
 }
 
-// This is the simplest kind of filter from a programming point of view.
+// An extremely simple filter to program.
 // We set y[i] = 0.5 * (x[i] + x[i-1]). 
 void simplest(AudioFile<double>::AudioBuffer& buffer) {
     int nChannels = buffer.size();
@@ -63,6 +63,3 @@ void simplest(AudioFile<double>::AudioBuffer& buffer) {
     }
     return;
 }
-
-/* Digital filter designed by mkfilter/mkshape/gencode   A.J. Fisher
-   Command line: /www/usr/fisher/helpers/mkfilter -Bu -Lp -o 4 -a 1.3605442177e-02 0.0000000000e+00 -l */

@@ -8,16 +8,16 @@ using namespace std;
 int errorMsg();
 string suffix(string fileName);
 string prefix(string fileName);
-
 void copyFromFile(AudioFile<double>& fileObj, string fileLoc, AudioFile<double>::AudioBuffer& buffer);
 
 int main(int argc, char** argv)
 {
+    // Work through guards to make sure our input is correct.
     if (argc != 3)
         return errorMsg();
 
-    bool doSimple = false;
     string filterType = argv[1];
+    bool doSimple = false;
     if (filterType == "simple")
         doSimple = true;
     else if (filterType == "butter")
@@ -25,6 +25,10 @@ int main(int argc, char** argv)
     else
         return errorMsg();
 
+    // In a real codebase, one might consider checking
+    // that the input file is properly formatted as 
+    // a .wav file, rather than just checking for 
+    // the .wav extension.
     string inputName = argv[2];
     if (inputName.length() < 4)
         return errorMsg();
@@ -34,20 +38,15 @@ int main(int argc, char** argv)
     string outputName = prefix(inputName) + ".new.wav";
     AudioFile<double> fileInterface;
 
-    // Initialize the buffer
-    //auto buffer = make_shared<AudioFile<double>::AudioBuffer>;
     AudioFile<double>::AudioBuffer buffer;
     copyFromFile(fileInterface, inputName, buffer);
 
-    // Run each channel through simple filter
     if (doSimple)
         simplest(buffer);
     else
         butterworth(buffer);
 
-    // Finish our work with the buffer
     bool ok = fileInterface.setAudioBuffer(buffer);
-    // Time to terminate the program
     if (ok) {
         fileInterface.save(outputName, AudioFileFormat::Wave);
         cout << "Complete!" << endl;
@@ -77,6 +76,7 @@ string prefix(string fileName) {
     return fileName.substr(0, fileName.length() - 4);
 }
 
+// load the file contents into the buffer.
 void copyFromFile(AudioFile<double>& fileObj, string fileLoc, AudioFile<double>::AudioBuffer& buffer) {
     fileObj.load(fileLoc);
 
