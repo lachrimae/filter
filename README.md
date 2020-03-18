@@ -3,7 +3,7 @@ This is a sort of "Hello world" of DSP and C++. It compiles into an executable t
 
 The second filtering process is arguably the most elementary filter possible of its kind. It sets the present output sample to the average of the two most recent input samples. I used SSE2 assembly instructions to compute this.
 
-My code is mostly in `dsp.cpp`, and I use the library [AudioFile](https://github.com/adamstark/AudioFile/) library to manage I/O.
+My code is mostly in `dsp.cpp`, and I use the [AudioFile](https://github.com/adamstark/AudioFile/) library to manage I/O.
 
 # Build instructions
 ```bash
