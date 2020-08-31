@@ -1,5 +1,5 @@
 # Filter
-This is a sort of "Hello world" of DSP and C++. It compiles into an executable that runs one of two filtering processes. The first one, "butter", runs a 4-pole Butterworth filter with a corner frequency of 700 Hz. The mathematical function required was calculated using A.J. Fisher's mkfilter package, accessible at [this webpage](https://www-users.cs.york.ac.uk/~fisher/mkfilter/).
+This is a sort of "Hello world" of DSP, C++ and assembly. It compiles into an executable that runs one of two filtering processes. The first one, "butter", runs a 4-pole Butterworth filter with a corner frequency of 700 Hz. The mathematical function required was calculated using A.J. Fisher's mkfilter package, accessible at [this webpage](https://www-users.cs.york.ac.uk/~fisher/mkfilter/).
 
 The second filtering process is arguably the most elementary filter possible of its kind. It sets the present output sample to the average of the two most recent input samples. I used SSE2 assembly instructions to compute this.
 
